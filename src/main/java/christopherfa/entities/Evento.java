@@ -1,36 +1,11 @@
 package christopherfa.entities;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "eventi")
 public class Evento {
-    public void setNumeroMassimoPartecipanti(int i) {
-    }
-
-    public void setTipoEvento(christopherfa.entities.TipoEvento tipoEvento) {
-    }
-
-    public void setDescrizione(String evento) {
-    }
-
-    public void setDataEvento(LocalDate of) {
-    }
-
-    public void setTitolo(String concerto) {
-    }
-
-    public String getId() {
-        return "";
-    }
-
-    public String getTitolo() {
-        return "";
-    }
-
-    public enum TipoEvento {
-    PUBBLICO, PRIVATO
-}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,5 +21,53 @@ public class Evento {
     private TipoEvento tipoEvento;
 
     private int numeroMassimoPartecipanti;
-}
 
+    // COSTRUTTORE VUOTO
+    public Evento() {
+    }
+
+    // GETTER E SETTER
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitolo() {
+        return titolo;
+    }
+
+    public void setTitolo(String titolo) {
+        this.titolo = titolo;
+    }
+
+    public LocalDate getDataEvento() {
+        return dataEvento;
+    }
+
+    public void setDataEvento(LocalDate dataEvento) {
+        this.dataEvento = dataEvento;
+    }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
+    public TipoEvento getTipoEvento() {
+        return tipoEvento;
+    }
+
+    public void setTipoEvento(TipoEvento tipoEvento) {
+        this.tipoEvento = tipoEvento;
+    }
+
+    public int getNumeroMassimoPartecipanti() {
+        return numeroMassimoPartecipanti;
+    }
+
+    public void setNumeroMassimoPartecipanti(int numeroMassimoPartecipanti) {
+        this.numeroMassimoPartecipanti = numeroMassimoPartecipanti;
+    }
+}
