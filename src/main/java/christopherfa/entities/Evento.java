@@ -2,6 +2,7 @@ package christopherfa.entities;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "eventi")
@@ -70,4 +71,11 @@ public class Evento {
     public void setNumeroMassimoPartecipanti(int numeroMassimoPartecipanti) {
         this.numeroMassimoPartecipanti = numeroMassimoPartecipanti;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
+
+    @OneToMany(mappedBy = "evento", cascade = CascadeType.REMOVE)
+    private List<Partecipazione> partecipazioni;
 }

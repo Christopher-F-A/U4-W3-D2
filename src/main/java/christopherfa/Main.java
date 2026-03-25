@@ -2,6 +2,7 @@ package christopherfa;
 
 import christopherfa.dao.EventoDAO;
 import christopherfa.entities.Evento;
+import christopherfa.entities.Location;
 import christopherfa.entities.TipoEvento;
 
 import java.time.LocalDate;
@@ -34,5 +35,32 @@ public class Main {
         if (recuperato != null) {
             System.out.println("Evento trovato: " + recuperato.getTitolo());
         }
+
+        // 1. Crea e salva una Location
+        Location location = new Location();
+        location.setNome("Stadio Olimpico");
+        location.setCitta("Roma");
+        locationDAO.save("location1");
+
+       // 2. Crea un Evento e collego alla Location
+        Evento ev = new Evento();
+        ev.setTitolo("Partita di beneficenza");
+        ev.setLocation("location1");
+        eventoDAO.save(ev);
+
+       // 3. Crea e salva una Persona
+        Persona p = new Persona();
+        p.setNome("Christopher");
+        p.setCognome("F-A");
+        personaDAO.save(p);
+
+       // 4. Crea una Partecipazione che unisce i due
+        Partecipazione part = new Partecipazione();
+        part.setEvento(ev);
+        part.setPersona(p);
+        part.setStato(StatoPartecipazione.CONFERMATA);
+        partecipazioneDAO.save(part);
+
+        System.out.println("Tutto collegato e salvato correttamente!");
     }
 }

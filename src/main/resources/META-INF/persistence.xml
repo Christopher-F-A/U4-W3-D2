@@ -4,6 +4,9 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
     <persistence-unit name="U4-W3-D2">
         <class>christopherfa.entities.Evento</class>
+        <class>christopherfa.entities.Persona</class>
+        <class>christopherfa.entities.Location</class>
+        <class>christopherfa.entities.Partecipazione</class>
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/U4-W3-D2"/>
 
@@ -11,6 +14,7 @@
             <property name="jakarta.persistence.jdbc.password" value="1234"/>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
+
         </properties>
     </persistence-unit>
 </persistence>
