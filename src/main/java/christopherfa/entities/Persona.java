@@ -23,4 +23,8 @@ public class Persona {
     @OneToMany(mappedBy = "persona", cascade = CascadeType.REMOVE)
     private List<Partecipazione> listaPartecipazioni;
 
+    public void setNome(String nome) { this.nome = nome; }
+    public void setCognome(String cognome) { this.cognome = cognome; }
+    public void setEmail(String email) { this.email = email; }
+    public void setSesso(Sesso sesso) { this.sesso = sesso; }
 }

@@ -1,66 +1,60 @@
 package christopherfa;
 
-import christopherfa.dao.EventoDAO;
-import christopherfa.entities.Evento;
-import christopherfa.entities.Location;
-import christopherfa.entities.TipoEvento;
-
+import christopherfa.dao.*;
+import christopherfa.entities.*;
 import java.time.LocalDate;
 
 public class Main {
-    public static void main(String[] args) {
+    public static <LocationDAO, PersonaDAO, PartecipazioneDAO> void main(String[] args) {
 
-        // 1. Istanziamo il DAO
         EventoDAO ed = new EventoDAO();
+        LocationDAO ld = new LocationDAO();
+        PersonaDAO pd = new PersonaDAO();
+        PartecipazioneDAO pard = new PartecipazioneDAO();
 
-        // 2. Creiamo nuovo evento di prova
-        Evento concerto = new Evento();
-        concerto.setTitolo("Concerto");
-        concerto.setDataEvento(LocalDate.of(2026, 5, 20));
-        concerto.setDescrizione("evento");
-        concerto.setTipoEvento(TipoEvento.PUBBLICO);
-        concerto.setNumeroMassimoPartecipanti(500);
-
-        // 3. Salviamo nel database
         try {
-            ed.save(concerto);
-            System.out.println("Evento salvato con successo! ID: " + concerto.getId());
+
+            Location location = new Location();
+            location.setNome("Stadio Olimpico");
+            location.setCitta("Roma");
+            ld.save(location); //
+
+
+            PartitaDiCalcio partita = new PartitaDiCalcio();
+            partita.setTitolo("Derby del Cuore");
+            partita.setDataEvento(LocalDate.of(2026, 6, 15));
+            partita.setTipoEvento(TipoEvento.PUBBLICO);
+            partita.setNumeroMassimoPartecipanti(50000);
+            partita.setLocation(location);
+
+            partita.setSquadraDiCasa("Roma");
+            partita.setSquadraOspite("Lazio");
+            partita.setGolSquadraDiCasa(2);
+            partita.setGolSquadraOspite(1);
+            partita.setSquadraVincente("Roma");
+            ed.save(partita);
+
+
+            Persona p = new Persona();
+            p.setNome("Christopher");
+            p.setCognome("F-A");
+            p.setEmail("chris@example.com");
+            p.setSesso(Sesso.M);
+            pd.save(p); //
+
+
+            Partecipazione part = new Partecipazione();
+            part.setEvento(partita); //
+            part.setPersona(p);      //
+            part.setStato(StatoPartecipazione.CONFERMATA);
+            pard.save(part);
+
+            System.out.println("Tutto collegato e salvato correttamente!");
+
+            System.out.println("Partite vinte in casa: " + ed.getPartiteVinteInCasa().size());
+
         } catch (Exception e) {
-            System.err.println("Errore durante il salvataggio: " + e.getMessage());
             e.printStackTrace();
         }
-
-        // 4. Prova a recuperarlo per vedere se lo legge
-        Evento recuperato = ed.getById(1L);
-        if (recuperato != null) {
-            System.out.println("Evento trovato: " + recuperato.getTitolo());
-        }
-
-        // 1. Crea e salva una Location
-        Location location = new Location();
-        location.setNome("Stadio Olimpico");
-        location.setCitta("Roma");
-        locationDAO.save("location1");
-
-       // 2. Crea un Evento e collego alla Location
-        Evento ev = new Evento();
-        ev.setTitolo("Partita di beneficenza");
-        ev.setLocation("location1");
-        eventoDAO.save(ev);
-
-       // 3. Crea e salva una Persona
-        Persona p = new Persona();
-        p.setNome("Christopher");
-        p.setCognome("F-A");
-        personaDAO.save(p);
-
-       // 4. Crea una Partecipazione che unisce i due
-        Partecipazione part = new Partecipazione();
-        part.setEvento(ev);
-        part.setPersona(p);
-        part.setStato(StatoPartecipazione.CONFERMATA);
-        partecipazioneDAO.save(part);
-
-        System.out.println("Tutto collegato e salvato correttamente!");
     }
 }

@@ -13,7 +13,7 @@ public class Location {
     private String nome;
     private String citta;
 
-    public void setNome(String stadioOlimpico) {
-    }
+    public void setNome(String nome) { this.nome = nome; }
+    public void setCitta(String citta) { this.citta = citta; }
 
 }

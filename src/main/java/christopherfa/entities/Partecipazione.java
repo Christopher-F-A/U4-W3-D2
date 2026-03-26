@@ -18,5 +18,14 @@ public class Partecipazione {
 
     @Enumerated(EnumType.STRING)
     private StatoPartecipazione stato;
+
+    public void setEvento(PartitaDiCalcio partita) {
+    }
+
+    public void setPersona(Persona p) {
+    }
+
+    public void setStato(StatoPartecipazione statoPartecipazione) {
+    }
     // Costruttore, Getter e Setter
 }
